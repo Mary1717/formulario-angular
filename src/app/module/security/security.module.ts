@@ -6,6 +6,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -15,10 +17,12 @@ import { InputTextModule } from 'primeng/inputtext';
   imports: [
     CommonModule,
     SecurityRoutingModule,
-    FormsModule,
+    FormsModule,  
     ReactiveFormsModule,
-    /* PasswordModule,
-    InputTextModule */
+    PasswordModule,
+    InputTextModule,
+    ButtonModule,
+    ToastModule
   ]
 })
 export class SecurityModule { }

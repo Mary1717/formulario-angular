@@ -1,14 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { TopbarComponent } from './components/topbar/topbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
-import { SharedRoutingModule } from './shared-routing.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TopbarComponent,
+    FooterComponent
+  ],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    BreadcrumbModule
+  ],
+  exports: [
+    TopbarComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }

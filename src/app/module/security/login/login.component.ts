@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SecurityService } from 'src/app/core/services/security/security.service';
 
 @Component({
   selector: 'app-login',
@@ -10,16 +12,21 @@ export class LoginComponent implements OnInit {
 
   personForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private securityService: SecurityService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
     this.personForm = this.formBuilder.group({
-      user: "",
-      password: ""
+      user: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(20)]]
     })
   }
 
-  mostrar(){
-    console.log(this.personForm.value);
+
+  login(){
+    this.securityService.login(this.personForm.value);
+  }
+
+  goSingUp(): void {
+    this.router.navigate(['security/register'])
   }
 }

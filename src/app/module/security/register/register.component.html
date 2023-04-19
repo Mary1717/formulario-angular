@@ -1,1 +1,22 @@
-<p>register works!</p>
+<div class= "container">
+    <form [formGroup]="personForm" (ngSubmit)="register()">
+        <div class="title">
+            <p>REGISTRO USUARIO</p><br>
+        </div>
+        <div class="field">
+            <label>N° de documento</label>
+            <input type="number" pInputText formControlName="documentNumber"/>
+        </div>
+        <div class="field">
+            <label>User</label>
+            <input type="email" pInputText formControlName="user"/>
+        </div>
+        <div class="field">
+            <label>Contraseña</label>
+            <p-password [toggleMask]="true" styleClass="input" formControlName="password"></p-password>
+        </div>
+        <div class="field">
+            <p-button label="Registrarse" styleClass="input" [disabled]="!personForm.valid" type="submit"></p-button>
+        </div>
+    </form>
+</div>

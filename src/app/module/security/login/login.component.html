@@ -1,16 +1,21 @@
-<div class= "contaniner">
-    <form [formGroup]="personForm">
+<div class= "container">
+    <form [formGroup]="personForm" (ngSubmit)="login()">
         <div class="title">
             <p>BIENVENIDO</p><br>
         </div>
-        <!-- <div class="subtitle">
+        <div class="field">
             <label>Usuario</label>
-            <input type="text" pInputText formControlName="user"/>
-        </div> -->
-        <!-- <div class="subtitle">
+            <input type="email" pInputText formControlName="user"/>
+        </div>
+        <div class="field">
             <label>Contraseña</label>
-            <p-password [toggleMask]="true" formControlName="password"></p-password>
-        </div> -->
-        <button (click)="mostrar()">hola</button>
+            <p-password [toggleMask]="true" styleClass="input" formControlName="password"></p-password>
+        </div>
+        <div class="register">
+            <button class="button_register" (click)="goSingUp()" >¿No tienes cuenta? Registrate.</button><br>
+        </div>
+        <div class="field">
+            <p-button label="Ingresar" styleClass="input" [disabled]="!personForm.valid" type="submit"></p-button>
+        </div>
     </form>
 </div>

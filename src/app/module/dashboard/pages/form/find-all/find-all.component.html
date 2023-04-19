@@ -1,1 +1,64 @@
-<p>find-all works!</p>
+<div class="container">
+    <h1>Consultar encuestas</h1>
+
+    <div class="card">
+        <p-table [value]="forms" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>N° de documento</th>
+                    <th>Email</th>
+                    <th>Comentarios</th>
+                    <th>Marca de Pc</th>
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-form>
+                <tr>
+                    <td>{{form.user.documentNumber}}</td>
+                    <td>{{form.email}}</td>
+                    <td>{{form.comments}}</td>
+                    <td>{{form.favoritePcMark.markName}}</td>
+                    <td>{{form.responseDate}}</td>
+                    <td>
+                        <p-toast></p-toast>
+                        <p-confirmPopup></p-confirmPopup>
+                        <i class="pi pi-trash" (click)="confirm($event,form.idForm)"></i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="create">
+        <p-button label="Nueva encuesta" (onClick)="visible=true"></p-button>
+        <p-dialog header="Formulario de encuesta" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+            <form [formGroup]="form">
+                <div class="field">
+                    <label>No. documento</label>
+                    <input type="number" pInputText formControlName="user"/>
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" pInputText formControlName="email"/>
+                </div>
+                <div class="field">
+                    <label>Comentarios</label>
+                    <textarea rows="5" cols="30" pInputTextarea formControlName="comments"></textarea>
+                </div>
+                <div class="field">
+                    <label>Marca Pc favorita</label>
+                    <p-dropdown formControlName="favoritePcMark" [options]="marks" optionLabel="markName"></p-dropdown>
+                </div>
+                <div class="field">
+                    <label>Fecha de respuesta</label>
+                    <input type="datetime" pInputText readonly formControlName="responseDate"/>
+                </div>
+                <div class="button">
+                    <p-toast></p-toast>
+                    <p-button label="Guardar" styleClass="input" [disabled]="!form.valid" (onClick)="saveForm()"></p-button>
+                    <p-button label="Cancelar" styleClass="input"  type="submit" (onClick)="visible=false"></p-button>
+                </div>
+            </form>
+        </p-dialog>
+    </div>
+</div>
