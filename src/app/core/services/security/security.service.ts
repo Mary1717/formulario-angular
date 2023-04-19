@@ -12,6 +12,9 @@ export class SecurityService {
   token: string
   URL:string;
   checkEmailExists: any;
+  timer:any;
+  countSesion:number = 1;
+
 
   constructor(private http: HttpClient, private router: Router) {
     this.URL=environment.url_spring;
@@ -22,7 +25,8 @@ export class SecurityService {
    login(userData: any) {
     let url = this.URL+"/login";
     this.http.post<any>(url, userData,{ observe: 'response' }).subscribe({
-      next: (res) => {
+
+        next: (res) => {
         this.token = res.headers.get('authorization')!;
         localStorage.setItem('user', userData.user);
         localStorage.setItem('token', this.token);
@@ -30,7 +34,9 @@ export class SecurityService {
       },
       error: (error) => {
         console.log(error);
+        this.countSesion++;
       }
+      
     });
   }
 
@@ -45,5 +51,16 @@ export class SecurityService {
   sesionExist(): boolean {
     const token = localStorage.getItem('token')?.toString()!;
     return token ? true: false;
+  }
+
+  startTimer() {
+    this.timer = setTimeout(() => {
+      this.logout();
+    }, 30000);
+  }
+
+  resetTimer() {
+    clearTimeout(this.timer);
+    this.startTimer();
   }
 }

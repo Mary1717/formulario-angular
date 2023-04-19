@@ -16,6 +16,7 @@ import { TokenInterceptor } from './core/interceptors/token.interceptors';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule
+    
   ],
   providers: [
     {
